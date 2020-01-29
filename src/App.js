@@ -17,6 +17,8 @@ import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
 
+import { selectCartItems, selectCartItemsCount } from './redux/cart/cart.selectors'
+
 class App extends React.Component {
   unsubscribeFromAuth = null;
 
@@ -44,6 +46,11 @@ class App extends React.Component {
   }
 
   render() {
+
+    console.log('cartItems :' + this.props.cart)
+    console.log('cartCount :' + this.props.cartCount)
+
+
     return (
       <div>
         <Header />
@@ -69,7 +76,9 @@ class App extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
+  cart: selectCartItems,
+  cartCount : selectCartItemsCount
 });
 
 const mapDispatchToProps = dispatch => ({
